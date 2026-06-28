@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="yanhui / 衍辉 channel：把 AI 放进真实电商流程，记录电商业务、系统工程和 Agent 实践。"
+      content="yanhui / 衍辉 channel：AI Agent 开发者，关注 AI、电商业务和系统工程的真实落地。"
     />
     <meta name="theme-color" content="#f7f8fb" />
     <meta property="og:title" content="yanhui | 衍辉 channel" />
     <meta
       property="og:description"
-      content="Commerce AI Builder. AI cognition, ecommerce workflow and system notes."
+      content="AI Agent builder. Commerce workflow, backend systems and field notes."
     />
     <meta property="og:image" content="./assets/yanhui-avatar.png" />
     <title>yanhui | 衍辉 channel</title>
     <link rel="icon" href="./assets/yanhui-avatar-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260628-signal-mvp" />
+    <link rel="stylesheet" href="./styles.css?v=20260628-signal-board" />
   </head>
   <body data-active-signal="ai">
     <a class="skip-link" href="#main">跳到主内容</a>
@@ -34,8 +34,8 @@
           <span>衍辉 channel</span>
         </a>
         <nav class="nav-links" aria-label="页面栏目">
+          <a href="#work">Work</a>
           <a href="#channel">Channel</a>
-          <a href="#writing">Writing</a>
           <a href="#connect">Connect</a>
         </nav>
       </header>
@@ -51,30 +51,28 @@
             </h1>
             <p class="hero-subtitle" data-signal-copy>把 AI 放进真实电商流程。</p>
             <p class="signal-caption" data-signal-caption>
-              AI 是主线，电商是现场，系统是底座。
+              做过客服系统、导购链路和跨境售后，现在做 AI Agent。
             </p>
             <div class="hero-actions" aria-label="主要操作">
               <a class="button button-primary" href="#channel">关注公众号</a>
-              <a class="button button-secondary" href="https://mp.weixin.qq.com/s/eEFM-6_h1L7dSi4SmkOfdg" target="_blank" rel="noreferrer">读文章</a>
+              <a class="button button-secondary" href="#work">看我做什么</a>
             </div>
           </div>
 
           <div class="hero-visual" aria-label="衍辉 channel 信号系统" data-signal-visual>
-            <div class="signal-field">
-              <span class="field-scan" aria-hidden="true"></span>
-              <span class="field-orbit orbit-one" aria-hidden="true"></span>
-              <span class="field-orbit orbit-two" aria-hidden="true"></span>
-              <span class="field-orbit orbit-three" aria-hidden="true"></span>
-              <span class="signal-word" data-signal-label aria-hidden="true">AI</span>
-
-              <svg class="system-lines" viewBox="0 0 640 640" aria-hidden="true">
-                <path class="line line-ai" d="M320 320 L320 104" />
-                <path class="line line-tools" d="M320 320 C438 274 484 220 538 146" />
-                <path class="line line-commerce" d="M320 320 C222 278 156 312 96 382" />
-                <path class="line line-system" d="M320 320 C356 420 322 492 236 552" />
-                <path class="line line-ghost" d="M108 196 C218 96 414 92 532 210" />
-                <path class="line line-ghost" d="M132 516 C260 610 452 568 548 424" />
-              </svg>
+            <div class="signal-board">
+              <span class="board-line line-ai" aria-hidden="true"></span>
+              <span class="board-line line-tools" aria-hidden="true"></span>
+              <span class="board-line line-commerce" aria-hidden="true"></span>
+              <span class="board-line line-system" aria-hidden="true"></span>
+              <span class="board-corner corner-one" aria-hidden="true"></span>
+              <span class="board-corner corner-two" aria-hidden="true"></span>
+              <span class="board-focus" aria-hidden="true">
+                <strong>Field</strong>
+                <span>AI</span>
+                <span>Commerce</span>
+                <span>Systems</span>
+              </span>
 
               <div class="system-core">
                 <img
@@ -92,11 +90,11 @@
                 data-signal-node="ai"
                 data-signal-label="AI"
                 data-color="#ea4335"
-                data-title="不追热点，追判断。"
-                data-caption="每天看变化，只留下能进入流程的部分。"
+                data-title="AI Agent 落地。"
+                data-caption="把模型、知识库、工具和业务动作接成可用流程。"
                 aria-pressed="true"
               >
-                <span class="node-ring"></span>
+                <span class="node-ring"><i></i></span>
                 <span class="node-label">AI</span>
               </button>
 
@@ -104,14 +102,14 @@
                 class="map-node node-tools"
                 type="button"
                 data-signal-node="tools"
-                data-signal-label="Tools"
+                data-signal-label="Flow"
                 data-color="#4285f4"
-                data-title="工具要改流程。"
-                data-caption="不是收藏清单，是把重复动作变短。"
+                data-title="流程被重新组织。"
+                data-caption="不做工具清单，关注重复动作如何被缩短。"
                 aria-pressed="false"
               >
-                <span class="node-ring"></span>
-                <span class="node-label">Tools</span>
+                <span class="node-ring"><i></i></span>
+                <span class="node-label">Workflow</span>
               </button>
 
               <button
@@ -124,7 +122,7 @@
                 data-caption="商品、导购、价格、客服、售后，是 AI 价值最容易被验证的地方。"
                 aria-pressed="false"
               >
-                <span class="node-ring"></span>
+                <span class="node-ring"><i></i></span>
                 <span class="node-label">Commerce</span>
               </button>
 
@@ -134,21 +132,50 @@
                 data-signal-node="system"
                 data-signal-label="Systems"
                 data-color="#34a853"
-                data-title="系统是底座。"
-                data-caption="消息、缓存、权限、观测，决定 demo 能不能进入生产。"
+                data-title="系统决定落地。"
+                data-caption="消息、状态、缓存、权限、稳定性，决定 AI 能不能跑起来。"
                 aria-pressed="false"
               >
-                <span class="node-ring"></span>
+                <span class="node-ring"><i></i></span>
                 <span class="node-label">Systems</span>
               </button>
             </div>
           </div>
         </section>
 
+        <section class="proof-section" id="work" aria-labelledby="work-title">
+          <div class="proof-heading">
+            <h2 id="work-title">Profile</h2>
+            <p>不是简历。是我的工作坐标。</p>
+          </div>
+          <div class="proof-list">
+            <article data-signal="agent">
+              <span>01</span>
+              <h3>AI Agent</h3>
+              <p>把模型能力接入真实流程。</p>
+            </article>
+            <article data-signal="commerce">
+              <span>02</span>
+              <h3>电商现场</h3>
+              <p>客服、导购、售后都做过。</p>
+            </article>
+            <article data-signal="systems">
+              <span>03</span>
+              <h3>系统工程</h3>
+              <p>从链路设计到稳定性治理。</p>
+            </article>
+            <article data-signal="channel">
+              <span>04</span>
+              <h3>内容输出</h3>
+              <p>把经验写成可复用判断。</p>
+            </article>
+          </div>
+        </section>
+
         <section class="channel-section" id="channel" aria-labelledby="channel-title">
           <div class="channel-copy">
             <h2 id="channel-title">衍辉 channel</h2>
-            <p>写给想把 AI 用起来的人。</p>
+            <p>把 AI、电商和系统写给正在做事的人。</p>
             <a class="text-link" href="https://mp.weixin.qq.com/s/eEFM-6_h1L7dSi4SmkOfdg" target="_blank" rel="noreferrer">
               最新文章
             </a>
@@ -169,35 +196,6 @@
           </div>
         </section>
 
-        <section class="writing-section" id="writing" aria-labelledby="writing-title">
-          <div class="writing-heading">
-            <h2 id="writing-title">Writing</h2>
-            <p>四个长期栏目。</p>
-          </div>
-          <div class="writing-list">
-            <article data-signal="0101">
-              <span>01</span>
-              <h3>AI 日报</h3>
-              <p>趋势与判断</p>
-            </article>
-            <article data-signal="1010">
-              <span>02</span>
-              <h3>工具实测</h3>
-              <p>只看流程</p>
-            </article>
-            <article data-signal="0110">
-              <span>03</span>
-              <h3>电商链路</h3>
-              <p>商品、导购、售后</p>
-            </article>
-            <article data-signal="1001">
-              <span>04</span>
-              <h3>系统祛魅</h3>
-              <p>复杂系统的常识</p>
-            </article>
-          </div>
-        </section>
-
         <section class="connect-section" id="connect" aria-label="社交链接">
           <a href="https://x.com/yanhui_channel" target="_blank" rel="noreferrer">X</a>
           <a href="https://www.xiaohongshu.com/search_result?keyword=%E8%A1%8D%E8%BE%89channel" target="_blank" rel="noreferrer">小红书</a>
@@ -212,6 +210,6 @@
       </footer>
     </div>
 
-    <script src="./script.js?v=20260628-signal-mvp"></script>
+    <script src="./script.js?v=20260628-signal-board"></script>
   </body>
 </html>
