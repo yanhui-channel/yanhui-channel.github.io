@@ -3,6 +3,10 @@ const scrollSentinel = document.querySelector(".scroll-sentinel");
 const signalName = document.querySelector(".signal-name");
 const signalVisual = document.querySelector("[data-signal-visual]");
 const systemMap = document.querySelector(".system-map");
+const signalCopy = document.querySelector("[data-signal-copy]");
+const signalCaption = document.querySelector("[data-signal-caption]");
+const signalNodes = document.querySelectorAll("[data-signal-node]");
+const systemCoreLabel = document.querySelector(".system-core span");
 const broadcastTriggers = document.querySelectorAll("[data-broadcast]");
 
 const rippleColors = ["#ea4335", "#4285f4", "#fbbc05", "#34a853"];
@@ -76,6 +80,26 @@ if (signalVisual && systemMap) {
     signalVisual.style.setProperty("--tilt-y", "0deg");
   });
 }
+
+signalNodes.forEach((node) => {
+  node.addEventListener("click", () => {
+    signalNodes.forEach((item) => {
+      item.classList.remove("is-active");
+      item.setAttribute("aria-pressed", "false");
+    });
+
+    node.classList.add("is-active");
+    node.setAttribute("aria-pressed", "true");
+
+    if (signalCopy) signalCopy.textContent = node.dataset.title || "";
+    if (signalCaption) signalCaption.textContent = node.dataset.caption || "";
+    if (systemCoreLabel) systemCoreLabel.textContent = node.dataset.signalNode || "yanhui";
+
+    broadcastVisual();
+  });
+
+  node.addEventListener("pointerenter", broadcastVisual);
+});
 
 broadcastTriggers.forEach((trigger) => {
   trigger.addEventListener("pointerenter", broadcastVisual);

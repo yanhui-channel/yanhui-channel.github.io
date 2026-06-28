@@ -310,6 +310,16 @@ img {
   text-wrap: balance;
 }
 
+.signal-caption {
+  max-width: 440px;
+  min-height: 54px;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  font-weight: 560;
+  line-height: 1.55;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -548,11 +558,31 @@ img {
   box-shadow:
     0 20px 58px color-mix(in srgb, currentColor 10%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  color: var(--blue);
+  cursor: pointer;
+  font: inherit;
   padding: 13px 17px 13px 44px;
+  text-align: left;
   transition:
+    background 260ms var(--ease),
     transform 260ms var(--ease),
     box-shadow 260ms var(--ease),
     border-color 260ms var(--ease);
+}
+
+.map-node:hover,
+.map-node:focus-visible,
+.map-node.is-active {
+  border-color: color-mix(in srgb, currentColor 48%, transparent);
+  background: rgba(255, 255, 255, 0.93);
+  box-shadow:
+    0 28px 88px color-mix(in srgb, currentColor 20%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+}
+
+.map-node:focus-visible {
+  outline: 3px solid color-mix(in srgb, currentColor 24%, transparent);
+  outline-offset: 5px;
 }
 
 .map-node i {
@@ -588,11 +618,23 @@ img {
   transform: translateX(-50%);
 }
 
+.node-ai:hover,
+.node-ai:focus-visible,
+.node-ai.is-active {
+  transform: translateX(-50%) translateY(-6px);
+}
+
 .node-tools {
   right: 34px;
   top: 50%;
   color: var(--blue);
   transform: translateY(-50%);
+}
+
+.node-tools:hover,
+.node-tools:focus-visible,
+.node-tools.is-active {
+  transform: translateY(-50%) translateX(-6px);
 }
 
 .node-commerce {
@@ -602,11 +644,23 @@ img {
   transform: translateY(-50%);
 }
 
+.node-commerce:hover,
+.node-commerce:focus-visible,
+.node-commerce.is-active {
+  transform: translateY(-50%) translateX(6px);
+}
+
 .node-systems {
   bottom: 52px;
   left: 50%;
   color: var(--green);
   transform: translateX(-50%);
+}
+
+.node-systems:hover,
+.node-systems:focus-visible,
+.node-systems.is-active {
+  transform: translateX(-50%) translateY(6px);
 }
 
 .hero-visual.is-broadcasting .system-map {

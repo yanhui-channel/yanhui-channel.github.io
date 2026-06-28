@@ -13,7 +13,7 @@
     <meta property="og:image" content="./assets/yanhui-avatar.png" />
     <title>yanhui | 衍辉 channel</title>
     <link rel="icon" href="./assets/yanhui-avatar-icon.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260628-motion-mark" />
+    <link rel="stylesheet" href="./styles.css?v=20260628-signal-switch" />
   </head>
   <body>
     <a class="skip-link" href="#main">跳到主内容</a>
@@ -53,7 +53,10 @@
                 <span>yanhui</span>
               </button>
             </h1>
-            <p class="hero-subtitle">AI 是主线，电商是现场。</p>
+            <p class="hero-subtitle" data-signal-copy>AI 是主线，电商是现场。</p>
+            <p class="signal-caption" data-signal-caption>
+              用系统视角拆解 AI 如何进入真实业务。
+            </p>
             <div class="hero-actions" aria-label="主要操作">
               <a class="button button-primary" href="#channel">关注公众号</a>
               <a class="button button-secondary" href="#writing">看方向</a>
@@ -90,26 +93,54 @@
                 <span>yanhui</span>
               </div>
 
-              <div class="map-node node-ai">
+              <button
+                class="map-node node-ai is-active"
+                type="button"
+                data-signal-node="ai"
+                data-title="AI 是主线，电商是现场。"
+                data-caption="用系统视角拆解 AI 如何进入真实业务。"
+                aria-pressed="true"
+              >
                 <i></i>
                 <span>AI</span>
                 <strong>cognition</strong>
-              </div>
-              <div class="map-node node-tools">
+              </button>
+              <button
+                class="map-node node-tools"
+                type="button"
+                data-signal-node="agent"
+                data-title="Agent 不止是聊天框。"
+                data-caption="它更像流程、工具、知识和判断的重新编排。"
+                aria-pressed="false"
+              >
                 <i></i>
                 <span>Agent</span>
                 <strong>workflow</strong>
-              </div>
-              <div class="map-node node-commerce">
+              </button>
+              <button
+                class="map-node node-commerce"
+                type="button"
+                data-signal-node="commerce"
+                data-title="电商是最真实的 AI 试验场。"
+                data-caption="客服、导购、价格、售后，每一段流程都能被重新理解。"
+                aria-pressed="false"
+              >
                 <i></i>
                 <span>Commerce</span>
                 <strong>field</strong>
-              </div>
-              <div class="map-node node-systems">
+              </button>
+              <button
+                class="map-node node-systems"
+                type="button"
+                data-signal-node="system"
+                data-title="系统是想法落地的底座。"
+                data-caption="缓存、消息、权限、观测，决定一个 AI 工具能不能真的可用。"
+                aria-pressed="false"
+              >
                 <i></i>
                 <span>System</span>
                 <strong>base</strong>
-              </div>
+              </button>
             </div>
           </div>
         </section>
@@ -186,6 +217,6 @@
       </footer>
     </div>
 
-    <script src="./script.js?v=20260628-motion-mark"></script>
+    <script src="./script.js?v=20260628-signal-switch"></script>
   </body>
 </html>
