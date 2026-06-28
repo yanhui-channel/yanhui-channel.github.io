@@ -2,24 +2,39 @@ const topbar = document.querySelector(".topbar");
 const scrollSentinel = document.querySelector(".scroll-sentinel");
 const signalName = document.querySelector(".signal-name");
 const signalVisual = document.querySelector("[data-signal-visual]");
-const systemMap = document.querySelector(".system-map");
+const signalField = document.querySelector(".signal-field");
 const signalCopy = document.querySelector("[data-signal-copy]");
 const signalCaption = document.querySelector("[data-signal-caption]");
 const signalNodes = document.querySelectorAll("[data-signal-node]");
-const systemCoreLabel = document.querySelector(".system-core span");
-const broadcastTriggers = document.querySelectorAll("[data-broadcast]");
+const signalLabels = document.querySelectorAll("[data-signal-label]:not([data-signal-node])");
 
 const rippleColors = ["#ea4335", "#4285f4", "#fbbc05", "#34a853"];
 let rippleIndex = 0;
 let lastRippleAt = 0;
+
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+if ("scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}
+
+if (!window.location.hash) {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  };
+
+  scrollToTop();
+  window.addEventListener("pageshow", scrollToTop, { once: true });
+  window.addEventListener("load", () => window.requestAnimationFrame(scrollToTop), { once: true });
+}
 
 const setTopbarState = (isScrolled) => {
   if (!topbar) return;
   topbar.toggleAttribute("data-scrolled", isScrolled);
 };
 
-const broadcastVisual = () => {
-  if (!signalVisual) return;
+const pulseField = () => {
+  if (!signalVisual || prefersReducedMotion.matches) return;
   signalVisual.classList.remove("is-broadcasting");
   window.requestAnimationFrame(() => {
     signalVisual.classList.add("is-broadcasting");
@@ -27,7 +42,7 @@ const broadcastVisual = () => {
 };
 
 const createNameRipple = (event) => {
-  if (!signalName) return;
+  if (!signalName || prefersReducedMotion.matches) return;
 
   const now = performance.now();
   if (event.type === "pointermove" && now - lastRippleAt < 180) return;
@@ -42,8 +57,45 @@ const createNameRipple = (event) => {
   rippleIndex += 1;
 
   signalName.appendChild(ripple);
-  broadcastVisual();
+  pulseField();
   window.setTimeout(() => ripple.remove(), 920);
+};
+
+const createSignalBurst = (node) => {
+  if (!signalField || prefersReducedMotion.matches) return;
+
+  const fieldRect = signalField.getBoundingClientRect();
+  const nodeRect = node.getBoundingClientRect();
+  const burst = document.createElement("span");
+  burst.className = "signal-burst";
+  burst.style.left = `${nodeRect.left + nodeRect.width / 2 - fieldRect.left}px`;
+  burst.style.top = `${nodeRect.top + nodeRect.height / 2 - fieldRect.top}px`;
+  burst.style.color = node.dataset.color || "#4285f4";
+
+  signalField.appendChild(burst);
+  window.setTimeout(() => burst.remove(), 760);
+};
+
+const activateSignal = (node) => {
+  signalNodes.forEach((item) => {
+    item.classList.remove("is-active");
+    item.setAttribute("aria-pressed", "false");
+  });
+
+  node.classList.add("is-active");
+  node.setAttribute("aria-pressed", "true");
+
+  document.body.dataset.activeSignal = node.dataset.signalNode || "ai";
+  document.body.style.setProperty("--active-signal", node.dataset.color || "#4285f4");
+
+  if (signalCopy) signalCopy.textContent = node.dataset.title || "";
+  if (signalCaption) signalCaption.textContent = node.dataset.caption || "";
+  signalLabels.forEach((label) => {
+    label.textContent = node.dataset.signalLabel || "AI";
+  });
+
+  createSignalBurst(node);
+  pulseField();
 };
 
 if (scrollSentinel && "IntersectionObserver" in window) {
@@ -61,7 +113,7 @@ if (signalName) {
   signalName.addEventListener("click", createNameRipple);
 }
 
-if (signalVisual && systemMap) {
+if (signalVisual && signalField) {
   signalVisual.addEventListener("pointermove", (event) => {
     const rect = signalVisual.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width;
@@ -69,8 +121,8 @@ if (signalVisual && systemMap) {
     const clampedX = Math.min(1, Math.max(0, x));
     const clampedY = Math.min(1, Math.max(0, y));
 
-    systemMap.style.setProperty("--stage-x", `${clampedX * 100}%`);
-    systemMap.style.setProperty("--stage-y", `${clampedY * 100}%`);
+    signalField.style.setProperty("--stage-x", `${clampedX * 100}%`);
+    signalField.style.setProperty("--stage-y", `${clampedY * 100}%`);
     signalVisual.style.setProperty("--tilt-x", `${(0.5 - clampedY) * 5}deg`);
     signalVisual.style.setProperty("--tilt-y", `${(clampedX - 0.5) * 7}deg`);
   });
@@ -82,26 +134,6 @@ if (signalVisual && systemMap) {
 }
 
 signalNodes.forEach((node) => {
-  node.addEventListener("click", () => {
-    signalNodes.forEach((item) => {
-      item.classList.remove("is-active");
-      item.setAttribute("aria-pressed", "false");
-    });
-
-    node.classList.add("is-active");
-    node.setAttribute("aria-pressed", "true");
-
-    if (signalCopy) signalCopy.textContent = node.dataset.title || "";
-    if (signalCaption) signalCaption.textContent = node.dataset.caption || "";
-    if (systemCoreLabel) systemCoreLabel.textContent = node.dataset.signalNode || "yanhui";
-
-    broadcastVisual();
-  });
-
-  node.addEventListener("pointerenter", broadcastVisual);
-});
-
-broadcastTriggers.forEach((trigger) => {
-  trigger.addEventListener("pointerenter", broadcastVisual);
-  trigger.addEventListener("focusin", broadcastVisual);
+  node.addEventListener("click", () => activateSignal(node));
+  node.addEventListener("pointerenter", pulseField);
 });
